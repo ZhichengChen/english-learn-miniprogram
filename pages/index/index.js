@@ -25,5 +25,10 @@ Page({
         console.log(res.data['Level 1'][0]);
       }
     })
+  },
+  toStudy() {
+    wx.navigateTo({
+      url: '/pages/study/index'
+    })
   }
 })

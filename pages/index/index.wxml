@@ -10,7 +10,7 @@
         </view>
         <view class="flex-item" style="margin:10px;height:100px;padding-top:10px;">
           <view>
-            <view  style="float:left;">
+            <view  style="float:left;" bindtap="toStudy">
               <text style="display:block;font-size:80%;color:#AAA;">Listening</text>
               <text style="display:block;font-size:90%;margin:5px auto;">Name & Gender</text>
               <image style="width:15px;height:15px;" src="star-on.png"></image>
