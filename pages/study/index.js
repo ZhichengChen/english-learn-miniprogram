@@ -113,7 +113,7 @@ Page({
     this.setData({ recorderManager: recorderManager })
     var self = this;
     wx.request({
-      url: server + '/challenge.json', 
+      url: server + '/liulishuo.json', 
       data: {
         x: '',
         y: ''
@@ -122,9 +122,11 @@ Page({
         'content-type': 'application/json' 
       },
       success: function (res) {
+        var courses = res.data['Level 1'][0]['Unit 1'][0].courses;
+        console.log(res.data);
         self.setData({ 
-          courses: res.data.first_thing_first[0].courses ,
-          text: res.data.first_thing_first[0].courses[0]
+          courses: courses,
+          text: courses[0]
           })
       }
     })
