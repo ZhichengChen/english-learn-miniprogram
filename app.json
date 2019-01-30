@@ -8,6 +8,7 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#1d2a42",
     "navigationBarTitleText": "",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "navigationStyle": "custom"
   }
 }

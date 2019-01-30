@@ -1,8 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var server = 'https://en.chenzhicheng.com/';
-var server = 'http://localhost:3000/';
+var server = 'https://en.chenzhicheng.com';
+// var server = 'http://localhost:3000/';
 
 Page({
   data: {
@@ -65,7 +65,7 @@ Page({
       self.setData({
         recordText: 'checking'
       })
-      var urls = 'https://en.chenzhicheng.com/upload';
+      var urls = server + '/upload';
       wx.uploadFile({
         url: urls,
         filePath: res.tempFilePath,
@@ -86,6 +86,7 @@ Page({
               recordText: data.results[0].alternatives[0].transcript
             })
           } else {
+            console.log(data);
             self.setData({
               recordText: 'failed'
             })
@@ -112,7 +113,7 @@ Page({
     this.setData({ recorderManager: recorderManager })
     var self = this;
     wx.request({
-      url: 'http://localhost:3000/challenge.json', 
+      url: server + '/challenge.json', 
       data: {
         x: '',
         y: ''
@@ -129,10 +130,11 @@ Page({
     })
   },
   read: function () {
+    var cdnserver = 'http://pm5hzrwn2.bkt.clouddn.com';
     var self = this;
     var index = self.data.courseIndex;
     var video = self.data.courses[index].toLowerCase().replace(/ /g, '_').replace(/\W/g, '');
-    this.data.innerAudioContext.src = server+video+'.wav'
+    this.data.innerAudioContext.src = cdnserver + '/' + video+'.wav'
     this.data.innerAudioContext.play();
     self.setData({
       voice: './voice.png',
@@ -142,19 +144,26 @@ Page({
   next: function() {
     var index = this.data.courseIndex;
     var courses = this.data.courses;
-    
-    this.setData({
-      courseIndex: index+1,
-      text: courses[index +1]
-    });
+    if (index < courses.length-1) {
+      this.setData({
+        courseIndex: index + 1,
+        text: courses[index + 1]
+      });
+    }
   },
   prev: function() {
     var index = this.data.courseIndex;
     var courses = this.data.courses;
-
-    this.setData({
-      courseIndex: index - 1,
-      text: courses[index - 1]
+    if (index>0) {
+      this.setData({
+        courseIndex: index - 1,
+        text: courses[index - 1]
+      });
+    }
+  },
+  back: function() {
+    wx.navigateBack({
+      
     });
   },
   record: function () {

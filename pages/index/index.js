@@ -17,7 +17,7 @@ Page({
   onLoad: function () {
     var self = this;
     wx.request({
-      url: 'http://localhost:3000/liulishuo.json',
+      url: 'https://en.chenzhicheng.com/liulishuo.json',
       header: {
         'content-type': 'application/json'
       },
