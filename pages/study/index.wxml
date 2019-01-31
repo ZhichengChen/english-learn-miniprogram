@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view style="height:100%;margin:2%;">
+<view style="height:100%;margin:2%;margin-top:28px;">
   <view class="section" style="height:85vh;">
     <view class="flex-item" style="flex:1;">
       <image style="width:50rpx;height:50rpx;margin-top:55rpx;" src="left.png" bindtap="back"></image>

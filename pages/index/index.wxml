@@ -1,55 +1,25 @@
 <!--index.wxml-->
 <swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:1000px;">
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:800px;margin-top:28px;">
   <block wx:for="{{imgUrls}}">
-    <swiper-item style="background:#7FDBFF;height:100%;">
+    <swiper-item style="background:#7FDBFF;height:100%;"  wx:for="{{courses}}" wx:for-index="id" wx:for-item="course">
       <view class="flex-wrp" style="height: 100%;flex-direction:column;background:white;margin:20px 10px;border-radius:10px;">
         <view style="background:#0074D9;color:white;border-radius:10px 10px 0 0;padding:10px;">
-          <text style="display:block;font-size:80%;">PART - 1</text>
+          <text style="display:block;font-size:80%;">PART - {{id+1}}</text>
           <text style="font-weight:bold;">LEARNING</text>
         </view>
-        <view class="flex-item" style="margin:10px;height:100px;padding-top:10px;">
-          <view>
-            <view  style="float:left;" bindtap="toStudy">
-              <text style="display:block;font-size:80%;color:#AAA;">Listening</text>
-              <text style="display:block;font-size:90%;margin:5px auto;">Name & Gender</text>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-            </view>
-            <view style="float:right;">
-              <image style="width: 70px; height: 70px;" src="images.jpg"></image>
-            </view>
-          </view>
-        </view>
-        <view class="flex-item" style="margin:10px;height:100px;">
+        <view class="flex-item" wx:for="{{course['Unit '+(id+1)]}}" wx:for-index="dix" data-id="{{id}}"  data-idx="{{dix}}" wx:for-item="item" style="margin:10px;height:100px;padding-top:10px;" bindtap="toStudy">
           <view>
             <view  style="float:left;">
-              <text style="display:block;font-size:80%;color:#AAA;">Vocabulary</text>
-              <text style="display:block;font-size:90%;margin:5px auto;">Daily Objects</text>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-off-big.png"></image>
+              <text style="display:block;font-size:80%;color:#AAA;">{{item.type}}</text>
+              <text style="display:block;font-size:90%;margin:5px auto;">{{item.title}}</text>
+              <image style="width:15px;height:15px;" src="star-off.png"></image>
+              <image style="width:15px;height:15px;" src="star-off.png"></image>
+              <image style="width:15px;height:15px;" src="star-off.png"></image>
+              <image style="width:15px;height:15px;" src="star-off.png"></image>
             </view>
             <view style="float:right;">
-              <image style="width: 70px; height: 70px;" src="book.png"></image>
-            </view>
-          </view>
-        </view>
-        <view class="flex-item" style="margin:10px;height:100px;">
-          <view>
-            <view  style="float:left;">
-              <text style="display:block;font-size:80%;color:#AAA;">Vocabulary</text>
-              <text style="display:block;font-size:90%;margin:5px auto;">Daily Actions</text>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-              <image style="width:15px;height:15px;" src="star-on.png"></image>
-            </view>
-            <view style="float:right;">
-              <image style="width: 70px; height: 70px;" src="Book.png"></image>
+              <image style="width: 70px; height: 70px;" src="{{item.type}}.png"></image>
             </view>
           </view>
         </view>

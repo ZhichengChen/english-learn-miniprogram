@@ -25,11 +25,10 @@ Page({
     courses:null,
     courseIndex: 0
   },
-  onLoad: function () {
+  onLoad: function (option) {
     var x = 10;
     var y = 65 + 85;
     var self = this;
-    
     const innerAudioContext = wx.createInnerAudioContext()
     innerAudioContext.onEnded(() => {
       console.log('开始播放')
@@ -112,22 +111,14 @@ Page({
     })
     this.setData({ recorderManager: recorderManager })
     var self = this;
-    wx.request({
-      url: server + '/liulishuo.json', 
-      data: {
-        x: '',
-        y: ''
-      },
-      header: {
-        'content-type': 'application/json' 
-      },
-      success: function (res) {
-        var courses = res.data['Level 1'][0]['Unit 1'][0].courses;
-        console.log(res.data);
-        self.setData({ 
+    wx.getStorage({
+      key: 'data',
+      success(res) {
+        var courses = JSON.parse(res.data)['Level 1'][0]['Unit 1'][option.part].courses[option.section];
+        self.setData({
           courses: courses,
           text: courses[0]
-          })
+        })
       }
     })
   },

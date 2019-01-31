@@ -16,19 +16,44 @@ Page({
   },
   onLoad: function () {
     var self = this;
-    wx.request({
-      url: 'https://en.chenzhicheng.com/liulishuo.json',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data['Level 1'][0]);
+    try {
+      const value = wx.getStorageSync('data')
+      if (value) {
+        syncData({data:JOSN.parse(value.data)});
+        console.log('cache');
+      } else {
+        getData();
       }
-    })
+    } catch (e) {
+      getData();
+    }
+    function getData() {
+      console.log('net');
+      wx.request({
+        url: 'https://en.chenzhicheng.com/liulishuo.json',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          wx.setStorage({
+            key: 'data',
+            data: JSON.stringify(res.data)
+          })
+          syncData(res);
+        }
+      })
+    }
+    function syncData(res) {
+      self.setData({
+        courses: res.data['Level 1']
+      });
+    }
   },
-  toStudy() {
+  toStudy: function(event) {
+    var part = event.currentTarget.dataset.id;
+    var section = event.currentTarget.dataset.idx;
     wx.navigateTo({
-      url: '/pages/study/index'
+      url: '/pages/study/index?part='+part+'&section='+section
     })
   }
 })
